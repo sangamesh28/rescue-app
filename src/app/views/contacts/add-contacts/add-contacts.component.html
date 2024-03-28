@@ -1,0 +1,93 @@
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+      <form #contactForm="ngForm" (ngSubmit)="addContact(contactForm.value)" class="mt-5 p-4 rounded bg-light shadow-lg">
+
+        <h2 class="text-center mb-4">Contact Us</h2>
+
+        <div class="form-group">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control mb-3 "
+            id="name"
+            required
+            ngModel
+            name="name"
+            placeholder="Enter your name"
+          />
+        </div>
+
+        <!-- Email input -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control mb-3"
+            id="email"
+            email
+            required
+            ngModel
+            name="email"
+            placeholder="Enter your email address"
+          />
+        </div>
+
+        <!-- Phone number input -->
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control mb-3"
+            id="phone"
+            required
+            ngModel
+            name="phone"
+            placeholder="Enter your phone number"
+          />
+        </div>
+
+        <!-- Address input -->
+        <div class="form-group">
+          <label for="address" class="form-label">Address</label>
+          <textarea
+            class="form-control mb-3"
+            id="address"
+            required
+            ngModel
+            name="address"
+            placeholder="Enter your address"
+          ></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button
+          class="btn btn-primary btn-block mt-4"
+          type="submit"
+          [disabled]="!contactForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <c-toaster position="static">
+        <c-toast #toast [autohide]="true" [visible]="toasterVisible">
+          <c-toast-body>
+            Added Successfully!
+            <div class="mt-2 pt-2 border-top">
+              <button cButton color="primary" size="sm" (click)="viewContacts()">View Contacts</button>
+              <button [cToastClose]="toast" cButton class="ms-1" color="secondary" size="sm" (click)="closeToaster()">Add More Contacts</button>
+            </div>
+          </c-toast-body>
+        </c-toast>
+      </c-toaster>
+    </div>
+  </div>
+</div>
+
+

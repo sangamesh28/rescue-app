@@ -1,0 +1,84 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <button
+        class="btn btn-danger"
+        [hidden]="allContacts.length < 1"
+        (click)="clearAllContacts()"
+      >
+        Clear All Contacts
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-10 offset-md-1">
+      <div *ngIf="allContacts.length < 1" class="text-center">
+        <p class="text-muted">No contacts available!</p>
+      </div>
+      <div *ngIf="allContacts.length >= 1">
+        <table class="table" [hover]="true" cTable color="dark">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Address</th>
+              <th scope="col" class="text-center">Action</th> <!-- Center align Action column -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of allContacts">
+              <td>{{ contact.name }}</td>
+              <td>{{ contact.email }}</td>
+              <td>{{ contact.phone }}</td>
+              <td>{{ contact.address }}</td>
+              <td class="text-center button-container">
+                <button class="btn btn-primary btn-sm mr-3" (click)="editContact(contact)">
+                  <i class="fas fa-edit mr-1"></i>Edit
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="deleteContact(contact.id)">
+                  <i class="fas fa-trash-alt mr-1"></i>Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        
+      </div>
+    </div>
+  </div>
+  <c-alert color="danger" *ngIf="showDeleteAlert">Deleted Successfully!</c-alert>
+  <c-alert color="success" *ngIf="showModifyAlert">Modified Successfully!</c-alert>
+  <hr>
+
+  <div class="row" *ngIf="selectedContact">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center mb-4">Edit Contact</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="selectedContact.name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="selectedContact.email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="phoneNo">Phone Number</label>
+          <input type="text" class="form-control" id="phoneNo" [(ngModel)]="selectedContact.phone" name="phoneNo">
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" [(ngModel)]="selectedContact.address" name="address">
+        </div>
+        <div class="text-center mt-3 button-container">
+          <button type="button" class="btn btn-primary mr-3" (click)="saveEditedContact()">Save</button>
+          <button type="button" class="btn btn-secondary ml-3" (click)="cancelEdit()">Cancel</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
